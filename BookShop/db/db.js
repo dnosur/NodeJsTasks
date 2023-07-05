@@ -40,19 +40,15 @@ const deleteBook = (id, books) => {
 }
 
 const findBook = (param, books) => {
-    let results = [];
-
-    books.forEach(book => {
-        if (book.title === param.title ||
-            book.description === param.description ||
-            book.author === param.author ||
+    return books.filter(book => {
+        if (book.title.toLowerCase().indexOf(param.title.toLowerCase()) > -1 ||
+            book.description.toLowerCase().indexOf(param.description.toLowerCase()) > -1 ||
+            book.author.toLowerCase().indexOf(param.author.toLowerCase()) > -1 ||
             book.year === param.year ||
             book.price === param.price) {
-            results.push(book);
+            return book;
         }
     });
-
-    return results;
 }
 
 module.exports = { getAllBooks, addBook, updateBook, deleteBook, findBook }
