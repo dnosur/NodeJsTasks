@@ -12,7 +12,7 @@ const getAllBooks = () => {
 
 const addBook = (book, books) => {
 
-    if (!validateBook()) {
+    if (!validateBook(book)) {
         console.log("Book data is invalid!");
         return;
     }
@@ -24,7 +24,7 @@ const addBook = (book, books) => {
 
 const updateBook = (id, book, books) => {
 
-    if (!validateBook()) {
+    if (!validateBook(book)) {
         console.log("Book data is invalid!");
         return;
     }
