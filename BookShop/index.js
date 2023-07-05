@@ -1,6 +1,6 @@
 
 const { getAllBooks, addBook, updateBook, deleteBook, findBook } = require("./db/db");
-const { readlineSync, showAllBooks, showBook, createBook } = require("./utils/menuFunctions");
+const { readlineSync, showBooks, createBook } = require("./utils/menuFunctions");
 
 let books = getAllBooks();
 
@@ -22,14 +22,14 @@ while (true) {
     }
 
     if (action === 2) {
-        showAllBooks(books)
+        showBooks(books)
 
         readlineSync.question("");
         console.clear();
     }
 
     if (action === 3) {
-        showAllBooks(books)
+        showBooks(books)
 
         let id = readlineSync.questionInt("Enter book id to change: ");
         console.clear();
@@ -42,13 +42,13 @@ while (true) {
         }
 
         console.log("Old book data\n");
-        showBook(books[id]);
+        showBooks(books[id]);
 
         updateBook(id, createBook(), books);
     }
 
     if(action === 4){
-        showAllBooks(books)
+        showBooks(books)
 
         let id = readlineSync.questionInt("Enter book id to delete: ");
         console.clear();
@@ -65,6 +65,6 @@ while (true) {
 
     if(action === 5){
         const result = findBook(createBook(), books);
-        showAllBooks(result);
+        showBooks(result);
     }
 }
