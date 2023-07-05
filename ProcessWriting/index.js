@@ -36,6 +36,8 @@ const writeData = () => {
 
     return new Promise((resolve, reject) => {
         stdin.on("data", (keydata) => {
+            keydata = keydata.replace(/(\s*)$/g, "");
+            console.log(keydata + " " + keydata.length);
             resolve(keydata);
         })
 
@@ -46,11 +48,12 @@ const writeData = () => {
 }
 
 const main = async () => {
+    const regex = /^(?!\s)(.{3,})$/;
+
     while (true) {
         let data = await writeData();
-        console.clear();
 
-        if (data.length > 2) {
+        if (regex.test(data)) {
             writeFile(data)
                 .then(data => {
                     if (data) return readFile();
