@@ -1,5 +1,6 @@
 const express = require("express");
 const http = require("http");
+const url = require("url");
 
 const bodyParser = require("body-parser");
 
@@ -21,8 +22,16 @@ app.use((req,res, next) => {
     next();
 })
 
-app.use("/users", userRouter);
+const server = http.createServer((req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader("Content-Type", "application/json");
 
-http.createServer(app).listen(PORT, () => {
-    console.log('SERVER host http://localhost:' + PORT + '/');
+    if(req.url.startsWith("/users")) userRouter(req, res);
 })
+
+server.listen(PORT, () => {
+    console.log('SERVER host http://localhost:' + PORT + '/');
+});
+
+
